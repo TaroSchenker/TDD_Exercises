@@ -1,5 +1,6 @@
 // exercise.test.ts
 
+
 import {
   add,
   divide,
@@ -13,6 +14,7 @@ import {
   myFunction,
 } from "./excercise";
 
+
 /* 
   1. Simple function testing
   Write a test for a function called `add` that adds two numbers. 
@@ -21,11 +23,13 @@ import {
 */
 
 // TODO: Write your test here
+
 describe("add", () => {
   test("should add two numbers", () => {
     expect(add(1, 1)).toBe(2);
   });
 });
+
 
 /* 
   2. Array manipulation testing
@@ -78,6 +82,7 @@ describe("Async function testing", () => {
 */
 
 // TODO: Write your test here
+
 describe("Mocking and spy testiong", () => {
   test("`myFunction` calls `anotherFunction` with the correct argument.", () => {
     const mockFn = jest.fn();
@@ -168,6 +173,7 @@ describe("Promise Rejection testing", () => {
 
 // TODO: Write your test here
 
+
 /* 
 6. Complex Array manipulation testing
 
@@ -215,3 +221,4 @@ Write a test for a function called sortObjectKeys that sorts an object by its ke
 */
 
 // TODO: Write your test here
+

@@ -1,3 +1,4 @@
+
 export const add = (a: number, b: number): number => {
   return a + b;
 };
@@ -64,3 +65,5 @@ export async function fetchData() {
 export async function fetchError(){
   return Promise.reject(new Error("Error"))
 }
+
+
