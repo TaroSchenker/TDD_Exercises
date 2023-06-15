@@ -9,6 +9,31 @@ export const includesValue = (arr: Array<number>, val: number): boolean => {
 interface ITestObject<TKey, TValue> {
   TKey: TValue;
 }
-export function keyValue<T, K extends keyof T,>(obj: T, key: K, val: any) {
+export function keyValue<T, K extends keyof T>(obj: T, key: K, val: any) {
   return obj[key] === val;
+}
+
+interface MockResponse {
+  data: string
+}
+
+interface JsonResponse {
+  json(): Promise<MockResponse>;
+  status: number
+}
+
+export async function getData(url: string): Promise<JsonResponse> {
+  const mockResponse = { data: "someData" };
+  return new Promise((res, reject) => {
+    setTimeout(() => {
+      if (url) {
+        res({
+          json: () => Promise.resolve(mockResponse),
+          status: 200,
+        });
+      } else {
+        reject("404: Not Found");
+      }
+    });
+  });
 }

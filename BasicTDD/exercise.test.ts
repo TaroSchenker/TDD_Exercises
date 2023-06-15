@@ -1,6 +1,6 @@
 // exercise.test.ts
 
-import { add, includesValue, keyValue } from "./excercise";
+import { add, getData, includesValue, keyValue } from "./excercise";
 
 /* 
   1. Simple function testing
@@ -36,7 +36,6 @@ describe("includesValue", () => {
   Then implement the function to make the test pass.
 */
 
-
 // TODO: Write your test here
 describe("Object manipulation Testing", () => {
   test("Check whether an object includes a certain key value pair and returns true if key value pair exists", () => {
@@ -53,7 +52,14 @@ describe("Object manipulation Testing", () => {
 */
 
 // TODO: Write your test here
+describe("Async function testing", () => {
+  test("getData returns a promise that resolves with data", async () => {
+    const response = await getData("testurl");
+    const data = await response.json()
+    expect(data).toEqual({data: "someData"})
+  });
 
+});
 /* 
   5. Mocking and spy testing
   Write a test for a function called `myFunction` that calls another function `anotherFunction` with a specific argument.
@@ -62,7 +68,12 @@ describe("Object manipulation Testing", () => {
 */
 
 // TODO: Write your test here
-
+describe("Mocking and spy testiong", () => {
+  test("`myFunction` calls `anotherFunction` with the correct argument.", () => {
+    const myFunction = jest.fn() 
+    
+  })
+})
 /* 
   6. Error handling testing
   Write a test for a function called `divide` that divides two numbers. 
@@ -206,4 +217,3 @@ Write a test for a function called sortObjectKeys that sorts an object by its ke
 */
 
 // TODO: Write your test here
-
