@@ -50,3 +50,9 @@ export function divide(a: number, b: number) {
   if (a === 0 || b === 0) return "Cannot divide by zero";
   return a / b;
 }
+
+export function doAfterDelay(cb: () => void, delay: number) {
+  setTimeout(() => {
+    cb();
+  }, delay);
+}

@@ -3,6 +3,7 @@
 import {
   add,
   divide,
+  doAfterDelay,
   functionObject,
   getData,
   includesValue,
@@ -97,8 +98,8 @@ describe("Error handling testing", () => {
   test(" if the second argument is zero, the function should throw an Error with the message 'Cannot divide by zero'", () => {
     const resultSuccess = divide(6, 2);
     const resultFail = divide(6, 0);
-    expect(resultSuccess).toEqual(3)
-    expect(resultFail).toBe("Cannot divide by zero")
+    expect(resultSuccess).toEqual(3);
+    expect(resultFail).toBe("Cannot divide by zero");
   });
 });
 
@@ -111,7 +112,19 @@ describe("Error handling testing", () => {
 */
 
 // TODO: Write your test here
-
+describe("Callback function testing", () => {
+  afterAll(() => jest.useRealTimers()); 
+  test("The function should take a callback function and a delay in milliseconds as arguments, and execute the callback after the delay.", async () => {
+    jest.useFakeTimers();
+    const mockcallback = jest.fn();
+    const delay = 500;
+    doAfterDelay(mockcallback, delay);
+    expect(mockcallback).not.toHaveBeenCalled();
+    jest.advanceTimersByTime(delay)
+    expect(mockcallback).toHaveBeenCalled();
+  });
+  
+});
 /* 
   8. Promise resolution testing
   Write a test for a function called `fetchData` that returns a Promise which resolves to a certain value.
