@@ -1,5 +1,20 @@
 // exercise.test.ts
 
+
+import {
+  add,
+  divide,
+  doAfterDelay,
+  fetchData,
+  fetchError,
+  functionObject,
+  getData,
+  includesValue,
+  keyValue,
+  myFunction,
+} from "./excercise";
+
+
 /* 
   1. Simple function testing
   Write a test for a function called `add` that adds two numbers. 
@@ -9,6 +24,13 @@
 
 // TODO: Write your test here
 
+describe("add", () => {
+  test("should add two numbers", () => {
+    expect(add(1, 1)).toBe(2);
+  });
+});
+
+
 /* 
   2. Array manipulation testing
   Write a test for a function called `includesValue` that checks whether an array includes a value. 
@@ -17,7 +39,11 @@
 */
 
 // TODO: Write your test here
-
+describe("includesValue", () => {
+  test("Function should return true if the given value is present in the given array", () => {
+    expect(includesValue([5, 10, 15], 15)).toBeTruthy();
+  });
+});
 /* 
   3. Object manipulation testing
   Write a test for a function called `keyValue` that checks whether an object includes a certain key-value pair. 
@@ -26,7 +52,12 @@
 */
 
 // TODO: Write your test here
-
+describe("Object manipulation Testing", () => {
+  test("Check whether an object includes a certain key value pair and returns true if key value pair exists", () => {
+    expect(keyValue({ test: "target" }, "test", "target")).toBeTruthy;
+    expect(keyValue({ test: "target" }, "test", "000")).toBeFalsy;
+  });
+});
 /* 
   4. Async function testing
   Write a test for a function called `getData` that fetches data from a given URL and returns the data.
@@ -36,7 +67,13 @@
 */
 
 // TODO: Write your test here
-
+describe("Async function testing", () => {
+  test("getData returns a promise that resolves with data", async () => {
+    const response = await getData("testurl");
+    const data = await response.json();
+    expect(data).toEqual({ data: "someData" });
+  });
+});
 /* 
   5. Mocking and spy testing
   Write a test for a function called `myFunction` that calls another function `anotherFunction` with a specific argument.
@@ -45,6 +82,97 @@
 */
 
 // TODO: Write your test here
+
+describe("Mocking and spy testiong", () => {
+  test("`myFunction` calls `anotherFunction` with the correct argument.", () => {
+    const mockFn = jest.fn();
+    functionObject.myFunction = mockFn;
+    const spy = jest.spyOn(functionObject, "myFunction");
+    myFunction(functionObject.myFunction);
+    expect(spy).toHaveBeenCalled();
+  });
+});
+/* 
+  6. Error handling testing
+  Write a test for a function called `divide` that divides two numbers. 
+  The function should take two arguments and return their quotient. 
+  However, if the second argument is zero, the function should throw an Error with the message "Cannot divide by zero".
+  Then implement the function to make the test pass.
+*/
+
+// TODO: Write your test here
+describe("Error handling testing", () => {
+  test(" if the second argument is zero, the function should throw an Error with the message 'Cannot divide by zero'", () => {
+    const resultSuccess = divide(6, 2);
+    const resultFail = divide(6, 0);
+    expect(resultSuccess).toEqual(3);
+    expect(resultFail).toBe("Cannot divide by zero");
+  });
+});
+
+/* 
+  7. Callback function testing
+  Write a test for a function called `doAfterDelay` that executes a callback after a delay.
+  The function should take a callback function and a delay in milliseconds as arguments, and execute the callback after the delay.
+  You can use jest's fake timers to test this.
+  Then implement the function to make the test pass.
+*/
+
+// TODO: Write your test here
+describe("Callback function testing", () => {
+  afterAll(() => jest.useRealTimers());
+  test("The function should take a callback function and a delay in milliseconds as arguments, and execute the callback after the delay.", async () => {
+    jest.useFakeTimers();
+    const mockcallback = jest.fn();
+    const delay = 500;
+    doAfterDelay(mockcallback, delay);
+    expect(mockcallback).not.toHaveBeenCalled();
+    jest.advanceTimersByTime(delay);
+    expect(mockcallback).toHaveBeenCalled();
+  });
+});
+/* 
+  8. Promise resolution testing
+  Write a test for a function called `fetchData` that returns a Promise which resolves to a certain value.
+  The function should take no arguments, and return a Promise that resolves to the string "Data".
+  Then implement the function to make the test pass.
+*/
+
+// TODO: Write your test here
+describe("Promise resolution testing", () => {
+  test(" The function should take no arguments, and return a Promise that resolves to the string Data", async () => {
+    const response = await fetchData();
+    expect(response).toBe("Data");
+  });
+});
+/* 
+  9. Promise rejection testing
+  Write a test for a function called `fetchError` that returns a Promise which rejects with an Error.
+  The function should take no arguments, and return a Promise that rejects with an Error with the message "Error".
+  Then implement the function to make the test pass.
+*/
+
+// TODO: Write your test here
+describe("Promise Rejection testing", () => {
+  test(" The function should take no arguments, and return a Promise that rejects with an Error with the message 'Error'", async () => {
+    await expect(fetchError()).rejects.toEqual(new Error("Error"))
+  });
+});
+/* 
+  10. Event emission testing
+  Write a test for a class called `EventEmitter` that can emit events and register event listeners.
+  The class should have an `on` method to register an event listener, and an `emit` method to emit an event.
+  You should write tests to make sure that the event listeners are called when an event is emitted.
+  Then implement the class to make the test pass.
+*/
+
+// TODO: Write your test here
+
+// exercise.test.ts
+
+
+// TODO: Write your test here
+
 
 /* 
 6. Complex Array manipulation testing
