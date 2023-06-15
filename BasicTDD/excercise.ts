@@ -14,12 +14,12 @@ export function keyValue<T, K extends keyof T>(obj: T, key: K, val: any) {
 }
 
 interface MockResponse {
-  data: string
+  data: string;
 }
 
 interface JsonResponse {
   json(): Promise<MockResponse>;
-  status: number
+  status: number;
 }
 
 export async function getData(url: string): Promise<JsonResponse> {
@@ -36,4 +36,17 @@ export async function getData(url: string): Promise<JsonResponse> {
       }
     });
   });
+}
+
+export const functionObject = {
+  myFunction: () => {},
+};
+
+export function myFunction(fn: () => void) {
+  fn();
+}
+
+export function divide(a: number, b: number) {
+  if (a === 0 || b === 0) return "Cannot divide by zero";
+  return a / b;
 }

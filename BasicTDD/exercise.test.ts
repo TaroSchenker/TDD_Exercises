@@ -1,6 +1,14 @@
 // exercise.test.ts
 
-import { add, getData, includesValue, keyValue } from "./excercise";
+import {
+  add,
+  divide,
+  functionObject,
+  getData,
+  includesValue,
+  keyValue,
+  myFunction,
+} from "./excercise";
 
 /* 
   1. Simple function testing
@@ -55,10 +63,9 @@ describe("Object manipulation Testing", () => {
 describe("Async function testing", () => {
   test("getData returns a promise that resolves with data", async () => {
     const response = await getData("testurl");
-    const data = await response.json()
-    expect(data).toEqual({data: "someData"})
+    const data = await response.json();
+    expect(data).toEqual({ data: "someData" });
   });
-
 });
 /* 
   5. Mocking and spy testing
@@ -70,10 +77,13 @@ describe("Async function testing", () => {
 // TODO: Write your test here
 describe("Mocking and spy testiong", () => {
   test("`myFunction` calls `anotherFunction` with the correct argument.", () => {
-    const myFunction = jest.fn() 
-    
-  })
-})
+    const mockFn = jest.fn();
+    functionObject.myFunction = mockFn;
+    const spy = jest.spyOn(functionObject, "myFunction");
+    myFunction(functionObject.myFunction);
+    expect(spy).toHaveBeenCalled();
+  });
+});
 /* 
   6. Error handling testing
   Write a test for a function called `divide` that divides two numbers. 
@@ -83,6 +93,14 @@ describe("Mocking and spy testiong", () => {
 */
 
 // TODO: Write your test here
+describe("Error handling testing", () => {
+  test(" if the second argument is zero, the function should throw an Error with the message 'Cannot divide by zero'", () => {
+    const resultSuccess = divide(6, 2);
+    const resultFail = divide(6, 0);
+    expect(resultSuccess).toEqual(3)
+    expect(resultFail).toBe("Cannot divide by zero")
+  });
+});
 
 /* 
   7. Callback function testing
