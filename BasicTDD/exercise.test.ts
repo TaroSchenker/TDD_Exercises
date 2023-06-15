@@ -4,6 +4,8 @@ import {
   add,
   divide,
   doAfterDelay,
+  fetchData,
+  fetchError,
   functionObject,
   getData,
   includesValue,
@@ -113,17 +115,16 @@ describe("Error handling testing", () => {
 
 // TODO: Write your test here
 describe("Callback function testing", () => {
-  afterAll(() => jest.useRealTimers()); 
+  afterAll(() => jest.useRealTimers());
   test("The function should take a callback function and a delay in milliseconds as arguments, and execute the callback after the delay.", async () => {
     jest.useFakeTimers();
     const mockcallback = jest.fn();
     const delay = 500;
     doAfterDelay(mockcallback, delay);
     expect(mockcallback).not.toHaveBeenCalled();
-    jest.advanceTimersByTime(delay)
+    jest.advanceTimersByTime(delay);
     expect(mockcallback).toHaveBeenCalled();
   });
-  
 });
 /* 
   8. Promise resolution testing
@@ -133,7 +134,12 @@ describe("Callback function testing", () => {
 */
 
 // TODO: Write your test here
-
+describe("Promise resolution testing", () => {
+  test(" The function should take no arguments, and return a Promise that resolves to the string Data", async () => {
+    const response = await fetchData();
+    expect(response).toBe("Data");
+  });
+});
 /* 
   9. Promise rejection testing
   Write a test for a function called `fetchError` that returns a Promise which rejects with an Error.
@@ -142,7 +148,11 @@ describe("Callback function testing", () => {
 */
 
 // TODO: Write your test here
-
+describe("Promise Rejection testing", () => {
+  test(" The function should take no arguments, and return a Promise that rejects with an Error with the message 'Error'", async () => {
+    await expect(fetchError()).rejects.toEqual(new Error("Error"))
+  });
+});
 /* 
   10. Event emission testing
   Write a test for a class called `EventEmitter` that can emit events and register event listeners.
@@ -155,49 +165,6 @@ describe("Callback function testing", () => {
 
 // exercise.test.ts
 
-/* 
-  1. Simple function testing
-  Write a test for a function called `add` that adds two numbers. 
-  The function should take two arguments and return their sum. 
-  Then implement the function to make the test pass.
-*/
-
-// TODO: Write your test here
-
-/* 
-  2. Array manipulation testing
-  Write a test for a function called `includesValue` that checks whether an array includes a value. 
-  The function should take an array and a value as arguments, and return true if the value is in the array, false otherwise. 
-  Then implement the function to make the test pass.
-*/
-
-// TODO: Write your test here
-
-/* 
-  3. Object manipulation testing
-  Write a test for a function called `keyValue` that checks whether an object includes a certain key-value pair. 
-  The function should take an object, a key, and a value as arguments, and return true if the key-value pair exists in the object, false otherwise. 
-  Then implement the function to make the test pass.
-*/
-
-// TODO: Write your test here
-
-/* 
-  4. Async function testing
-  Write a test for a function called `getData` that fetches data from a given URL and returns the data.
-  The function should take a URL string as an argument, and return a Promise that resolves with the fetched data. 
-  You may use a library such as axios for making the HTTP request.
-  Then implement the function to make the test pass.
-*/
-
-// TODO: Write your test here
-
-/* 
-  5. Mocking and spy testing
-  Write a test for a function called `myFunction` that calls another function `anotherFunction` with a specific argument.
-  You should use jest.fn() to create a mock function for `anotherFunction`, and jest.spyOn() to make sure `myFunction` calls `anotherFunction` with the correct argument.
-  Then implement the functions to make the test pass.
-*/
 
 // TODO: Write your test here
 

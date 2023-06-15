@@ -56,3 +56,11 @@ export function doAfterDelay(cb: () => void, delay: number) {
     cb();
   }, delay);
 }
+
+export async function fetchData() {
+  return Promise.resolve("Data");
+}
+
+export async function fetchError(){
+  return Promise.reject(new Error("Error"))
+}
